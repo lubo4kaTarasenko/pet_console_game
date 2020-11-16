@@ -1,5 +1,5 @@
 class Pet 
-  attr_accessor :name, :response
+  attr_accessor :name, :response, :states, :lifes
 
   def initialize(name)
     @name = name

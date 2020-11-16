@@ -1,7 +1,12 @@
+require 'rubygems'
+require 'bundler'
+Bundler.setup(:default, :ci)
+
 require_relative 'string_beauty'
 require_relative 'pet'
 require_relative 'dog'
 require_relative 'cat'
+require 'pet_html'
 
 class Ui
   COMMANDS = %w[feed play water toilet sleep status voice love observe exit].freeze
@@ -56,6 +61,8 @@ class Ui
       puts 'Don`t know this pet'
     end
     puts "Hi i'm your #{@pet.class}. My name is #{@pet.name}. And I love u :*".yellow
+    html = PetHtml.new(@pet)
+    html.open_html
   end
 
   def enter_command
