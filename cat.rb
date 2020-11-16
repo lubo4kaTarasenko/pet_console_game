@@ -18,6 +18,7 @@ class Cat < Pet
 
   def voice
     @response << 'meow, meow, mrrrr'
+    @emoji = '&#128570;'
     lower_states
     check
   end
@@ -25,6 +26,7 @@ class Cat < Pet
   def love
     @response << 'your cat jump on your hands and need you pet it'
     @response << 'murrrr murrr, i love you'
+    @emoji = '&#128571;'
     lower_states
     check
   end
@@ -36,6 +38,7 @@ class Cat < Pet
 
   def random
     @response <<  RANDOM_PHRASES.sample
+    @emoji = '&#128572;'
     lower_states
     check
   end

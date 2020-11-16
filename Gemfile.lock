@@ -1,22 +1,18 @@
-PATH
-  remote: ../pet_html
+GIT
+  remote: https://github.com/lubo4kaTarasenko/pet_html
+  revision: 339fbe8ea74d31db691a2b1d3901c11a5f4a6d8c
+  branch: master
   specs:
-    pet_html (0.0.3)
+    pet_html (0.0.5)
 
 GEM
   specs:
-    coderay (1.1.3)
-    method_source (1.0.0)
-    pry (0.13.1)
-      coderay (~> 1.1)
-      method_source (~> 1.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  pet_html (= 0.0.3)!
-  pry
+  pet_html (~> 0.0.5)!
 
 BUNDLED WITH
    2.1.2

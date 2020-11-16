@@ -1,5 +1,5 @@
 class Pet 
-  attr_accessor :name, :response, :states, :lifes
+  attr_accessor :name, :response, :states, :lifes, :emoji
 
   def initialize(name)
     @name = name
@@ -7,19 +7,20 @@ class Pet
     @water_level = 3
     @energy_level = 3
     @lifes = 3
-    @mood = 'happy'
     @need_toilet = false
-    @states = [@feed_level, @water_level, @energy_level]
+    @states = ["feed_level = #{@feed_level}", "water_level = #{@water_level}", "energy_level = #{@energy_level}"]
     @response = []    
+    @emoji = '&#128525;'
   end
 
   def feed
     if @feed_level < 3
       @feed_level = 3
       @response << 'omnomnom. thank u, dude'
-      @mood = 'happy'
+      @emoji = '&#128523;'
     else
       @response << 'feeeeeee. not hungry.'
+      @emoji = '&#128532;'
     end
     check
   end
@@ -28,9 +29,10 @@ class Pet
     if @water_level < 3
       @water_level = 3
       @response << 'bul-bul-hlyup-hlyup. thank u, dude'
-      @mood = 'happy'
+      @emoji = '&#128523;'
     else
       @response << 'feeeeeee. not thirsty.'
+      @emoji = '&#128532;'
     end
     check
   end
@@ -39,19 +41,22 @@ class Pet
     if @energy_level < 3
       @energy_level = 3
       @response << 'hhhhrrrrrptcchhhhhh'
+      @amoji = '&#128524;'
     else
       @response << 'feeeeeee. don`t wanna sleep'
+      @emoji = '&#128532;'
     end
     check
     lower_states
-    @mood = 'good'
   end
 
   def toilet
     if @need_toilet
       @response << 'I`ve done it'
+      @emoji = '&#128520;'
     else
       @response << 'feeeeeee. don`t need toilet'
+      @emoji = '&#128532;'
     end
     @need_toilet = false
     lower_states
@@ -60,9 +65,9 @@ class Pet
 
   def play
     @response << 'you`r playing with your pet'
+    @emoji = '&#128516;'
     lower_states
     check
-    @mood = 'happy'
   end
 
   def is_dead?
@@ -93,6 +98,7 @@ class Pet
     if [@feed_level, @water_level, @energy_level].any?(&:zero?)
       @lifes -=1 
       @response << "I have just lost one of my lifes(( now I have #{@lifes} lifes"
+      @emoji = '&#128561;'
       @feedlevel = 3
       @water_level = 3
       @energy_level = 3
@@ -105,6 +111,6 @@ class Pet
     @response << 'I need toilet!' if @need_toilet
     @response << 'I need to sleep!' if sleepy?
     maybe_lose_life  
-    @response.each{ |r| puts r.red}
+    @response.each{ |r| puts Array(r).join.red}
   end  
 end

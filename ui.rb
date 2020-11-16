@@ -12,34 +12,43 @@ class Ui
   COMMANDS = %w[feed play water toilet sleep status voice love observe exit].freeze
   def start
     init_pet
-    
+    html = PetHtml.new(@pet)
+    html.open_html
     while true      
       if @pet.is_dead? 
-        puts "i`m dying. i loved u. sorry. ".red
+        @pet.response << "i`m dying. i loved u. sorry. "
+        @emoji = '&#128561;'
         break
       end   
-
       command = enter_command
       @pet.response = []
       case command
       when 'feed'
         @pet.feed
+        PetHtml.new(@pet).make_html
       when 'water'
-        @pet.water
+        @pet.water       
+        PetHtml.new(@pet).make_html
       when 'toilet'
         @pet.toilet
+        PetHtml.new(@pet).make_html
       when 'sleep'
         @pet.go_sleep
+        PetHtml.new(@pet).make_html
       when 'play'
         @pet.play
+        PetHtml.new(@pet).make_html
       when 'status'
         p @pet
       when 'voice'
         @pet.voice
+        html.make_html
       when 'love'
         @pet.love
+        html.make_html
       when 'observe'
         @pet.random
+        PetHtml.new(@pet).make_html
       when 'exit'
         break
       else
@@ -61,8 +70,6 @@ class Ui
       puts 'Don`t know this pet'
     end
     puts "Hi i'm your #{@pet.class}. My name is #{@pet.name}. And I love u :*".yellow
-    html = PetHtml.new(@pet)
-    html.open_html
   end
 
   def enter_command
