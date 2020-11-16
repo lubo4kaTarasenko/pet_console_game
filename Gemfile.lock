@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/lubo4kaTarasenko/pet_html
-  revision: 339fbe8ea74d31db691a2b1d3901c11a5f4a6d8c
+  revision: 3dabf5f1a53d0b59e4a52ff94800694c21bbe349
   branch: master
   specs:
     pet_html (0.0.5)
