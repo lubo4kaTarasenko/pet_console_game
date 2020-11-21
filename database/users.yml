@@ -1,4 +1,10 @@
 ---
-:login: ff
-:passwors: '11'
-:role: User
+- :login: ddd
+  :password: '123'
+  :role: User
+- :login: qqq
+  :password: '1234'
+  :role: User
+- :login: ghy
+  :password: frt
+  :role: User

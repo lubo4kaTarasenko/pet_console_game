@@ -80,7 +80,15 @@ class Ui
     puts 'Please, enter you`r password: '.pink
     password = gets.chomp.downcase
     @user = User.new(login, password)
-    @user.save
+    if @user.exists?(YAML.load(File.read('./database/users.yml')) || [])
+      if @user.correct(YAML.load(File.read('./database/users.yml')) || [])
+        p "your pet here"
+      else 
+        p 'incorrect user'
+      end
+    else
+      @user.save
+    end
   end
 
   def enter_command
