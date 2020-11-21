@@ -1,6 +1,8 @@
-class User
+require 'yaml'
 
-  attr_accessor :login, password
+class User
+  
+  attr_accessor :login, :password
 
   def initialize(login, password)
     @login = login
@@ -11,6 +13,14 @@ class User
      %w[feed play water toilet sleep status voice love observe exit]
   end
 
+  def save
+    user = {
+      login: @login,
+      passwors: @password,
+      role: self.class.to_s
+    }
+    File.open('./database/users.yml', 'a') { |file| file.puts(user.to_yaml) }
+  end
 
 
 end

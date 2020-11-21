@@ -5,9 +5,9 @@ require_relative 'pet'
 require_relative 'dog'
 require_relative 'cat'
 require 'pet_html'
-require ' ../users/user.rb'
-require ' ../users/admin.rb'
-require ' ../users/superadmin.rb'
+require_relative '../users/user.rb'
+require_relative '../users/admin.rb'
+require_relative '../users/superadmin.rb'
 
 class Ui
  # COMMANDS = %w[feed play water toilet sleep status voice love observe exit].freeze
@@ -80,6 +80,7 @@ class Ui
     puts 'Please, enter you`r password: '.pink
     password = gets.chomp.downcase
     @user = User.new(login, password)
+    @user.save
   end
 
   def enter_command
