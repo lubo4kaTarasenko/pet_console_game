@@ -48,6 +48,9 @@ class Ui
       when 'observe'
         @pet.random
         update_html
+      when 'load_user_pet'
+        @pet = load_somebodys_pet
+        update_html
       when 'change_name'
         @pet.change_name
         update_html
@@ -119,6 +122,12 @@ class Ui
 
   def update_html
     PetHtml.new(@pet).make_html
+  end
+
+  def load_somebodys_pet
+    puts 'Enter login of user, which pet to load, please: '.green 
+    login = gets.strip.downcase
+    YAML.load(File.read("./database/#{login}.yml"))
   end
 end
 

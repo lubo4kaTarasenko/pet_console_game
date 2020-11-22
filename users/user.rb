@@ -37,5 +37,7 @@ class User
 
   def load_users
     YAML.load(File.read('./database/users.yml')) || []
+  rescue
+    []
   end
 end
