@@ -20,3 +20,6 @@
 - :login: kkk
   :password: '123'
   :role: User
+- :login: misha
+  :password: '123'
+  :role: User
