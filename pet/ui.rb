@@ -5,12 +5,9 @@ require_relative 'pet'
 require_relative 'dog'
 require_relative 'cat'
 require 'pet_html'
-require_relative '../users/user.rb'
-require_relative '../users/admin.rb'
-require_relative '../users/superadmin.rb'
+require_relative '../users/session'
 
 class Ui
- # COMMANDS = %w[feed play water toilet sleep status voice love observe exit].freeze
   def start
     init_user
     init_pet
@@ -27,30 +24,30 @@ class Ui
       case command
       when 'feed'
         @pet.feed
-        PetHtml.new(@pet).make_html
+        update_html
       when 'water'
         @pet.water       
-        PetHtml.new(@pet).make_html
+        update_html
       when 'toilet'
         @pet.toilet
-        PetHtml.new(@pet).make_html
+        update_html
       when 'sleep'
         @pet.go_sleep
-        PetHtml.new(@pet).make_html
+        update_html
       when 'play'
         @pet.play
-        PetHtml.new(@pet).make_html
+        update_html
       when 'status'
         p @pet
       when 'voice'
         @pet.voice
-        html.make_html
+        update_html
       when 'love'
         @pet.love
-        html.make_html
+        update_html
       when 'observe'
         @pet.random
-        PetHtml.new(@pet).make_html
+        update_html
       when 'exit'
         break
       else
@@ -79,22 +76,18 @@ class Ui
     login = gets.chomp.downcase
     puts 'Please, enter you`r password: '.pink
     password = gets.chomp.downcase
-    @user = User.new(login, password)
-    if @user.exists?(YAML.load(File.read('./database/users.yml')) || [])
-      if @user.correct(YAML.load(File.read('./database/users.yml')) || [])
-        p "your pet here"
-      else 
-        p 'incorrect user'
-      end
-    else
-      @user.save
-    end
+    @user = Session.new(login, password).log_in  
+    init_user unless @user
   end
 
   def enter_command
     puts 'choose a command, please: '.green
-    puts COMMANDS.join(', ')    
+    puts @user.commands.join(', ')    
     command = gets.strip.downcase
+  end
+
+  def update_html
+    PetHtml.new(@pet).make_html
   end
 end
 

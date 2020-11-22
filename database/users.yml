@@ -8,3 +8,6 @@
 - :login: ghy
   :password: frt
   :role: User
+- :login: lu
+  :password: '123123'
+  :role: User

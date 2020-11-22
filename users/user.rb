@@ -27,7 +27,7 @@ class User
       password: @password,
       role: self.class.to_s
     }
-    users_array = YAML.load(File.read('./database/users.yml')) || []
+    users_array = load_users
 
     if !exists?(users_array)
       users_array << user
@@ -35,5 +35,7 @@ class User
     end  
   end
 
-
+  def load_users
+    YAML.load(File.read('./database/users.yml')) || []
+  end
 end
