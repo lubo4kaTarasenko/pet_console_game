@@ -1,7 +1,8 @@
 class Pet 
-  attr_accessor :name, :response, :states, :lifes, :emoji
+  attr_accessor :name, :response, :states, :lifes, :emoji, :user_login
 
-  def initialize(name)
+  def initialize(name,user_login)
+    @user_login = user_login
     @name = name
     @feed_level = 3
     @water_level = 3
@@ -74,6 +75,33 @@ class Pet
     @lifes == 0
   end
 
+  def kill
+    puts 'killed'
+    @lifes = 0
+  end
+
+  def change_name
+    puts "What is new name?"
+    new_name = gets.strip.downcase
+    self.name = new_name
+  end
+
+  def change_user_login
+    puts "What is new login?"
+    new_login = gets.strip.downcase
+    self.user_login = new_login
+  end
+
+  def change_life_states
+    puts "What is new feed level? Enter a number from 1 to 3: "
+    @feed_level = gets.strip.to_i
+    puts "What is new water  level? Enter a number from 1 to 3:"
+    @water_level = gets.strip.to_i
+    puts "What is new energy level? Enter a number from 1 to 3:"
+    @energy_level = gets.strip.downcase
+    update_states
+  end
+
   private
 
   def hungry?
@@ -105,12 +133,17 @@ class Pet
     end
   end
 
+  def update_states
+    @states = ["feed_level = #{@feed_level}", "water_level = #{@water_level}", "energy_level = #{@energy_level}"]
+  end
+
   def check
     @response <<'I`m so  hungry!' if hungry?
     @response << 'I`m so thirsty!' if thirsty?
     @response << 'I need toilet!' if @need_toilet
     @response << 'I need to sleep!' if sleepy?
     maybe_lose_life  
+    update_states
     @response.each{ |r| puts Array(r).join.red}
   end  
 end

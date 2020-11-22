@@ -38,4 +38,12 @@ class Dog < Pet
     lower_states
     check
   end
+    
+  def reset
+    self.class.new(self.name, self.user_login)
+  end
+
+  def change_type
+    Dog.new(self.name)
+  end
 end

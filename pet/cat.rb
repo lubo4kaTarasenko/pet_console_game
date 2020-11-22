@@ -5,7 +5,7 @@ class Cat < Pet
     ['ohhh what a nice new home sneakers', 'the cat sucked in you`r sneakers'] 
   ].freeze
 
-  def initialize(name)
+  def initialize(name, login)
     super
     @lifes = 9
   end
@@ -41,5 +41,13 @@ class Cat < Pet
     @emoji = '&#128572;'
     lower_states
     check
+  end
+  
+  def reset
+    self.class.new(self.name, self.user_login)
+  end
+
+  def change_type
+    Dog.new(self.name, self.user_login)
   end
 end

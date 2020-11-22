@@ -11,3 +11,9 @@
 - :login: lu
   :password: '123123'
   :role: User
+- :login: ll
+  :password: '123'
+  :role: User
+- :login: kill
+  :password: "\x18"
+  :role: User

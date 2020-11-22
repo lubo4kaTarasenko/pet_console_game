@@ -48,6 +48,24 @@ class Ui
       when 'observe'
         @pet.random
         update_html
+      when 'change_name'
+        @pet.change_name
+        update_html
+      when 'change_type'
+        @pet = @pet.change_type
+        update_html
+      when 'change_owner_login'
+        @pet.change_user_login
+        update_html
+      when 'reset'
+        @pet = @pet.reset
+        update_html
+      when 'change_life_states'
+        @pet.change_life_states
+        update_html
+      when 'kill'
+        @pet.kill
+        update_html
       when 'exit'
         break
       else
@@ -62,9 +80,9 @@ class Ui
     puts 'Choose cat or dog, please'.yellow
     type = gets.chomp.downcase
     if type == 'dog'
-      @pet = Dog.new(name)
+      @pet = Dog.new(name, @user.login)
     elsif type == 'cat'
-      @pet = Cat.new(name)
+      @pet = Cat.new(name, @user.login)
     else
       puts 'Don`t know this pet'
     end
