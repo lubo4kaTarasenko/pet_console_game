@@ -12,6 +12,7 @@ class Pet
     @states = ["feed_level = #{@feed_level}", "water_level = #{@water_level}", "energy_level = #{@energy_level}"]
     @response = []    
     @emoji = '&#128525;'
+    save
   end
 
   def feed
@@ -24,6 +25,7 @@ class Pet
       @emoji = '&#128532;'
     end
     check
+    save
   end
   
   def water
@@ -36,6 +38,7 @@ class Pet
       @emoji = '&#128532;'
     end
     check
+    save
   end
 
   def go_sleep
@@ -49,6 +52,7 @@ class Pet
     end
     check
     lower_states
+    save
   end
 
   def toilet
@@ -62,6 +66,7 @@ class Pet
     @need_toilet = false
     lower_states
     check
+    save
   end
 
   def play
@@ -69,27 +74,32 @@ class Pet
     @emoji = '&#128516;'
     lower_states
     check
+    save
   end
 
   def is_dead?
     @lifes == 0
+    save
   end
 
   def kill
     puts 'killed'
     @lifes = 0
+    save
   end
 
   def change_name
     puts "What is new name?"
     new_name = gets.strip.downcase
     self.name = new_name
+    save
   end
 
   def change_user_login
     puts "What is new login?"
     new_login = gets.strip.downcase
     self.user_login = new_login
+    save
   end
 
   def change_life_states
@@ -100,6 +110,13 @@ class Pet
     puts "What is new energy level? Enter a number from 1 to 3:"
     @energy_level = gets.strip.downcase
     update_states
+    save
+  end
+
+  def save
+    name = self.user_login
+    yaml = YAML.dump(self) 
+    File.open("./database/#{name}.yml", 'w') { |file| file.puts(yaml) } 
   end
 
   private

@@ -17,3 +17,6 @@
 - :login: kill
   :password: "\x18"
   :role: User
+- :login: kkk
+  :password: '123'
+  :role: User

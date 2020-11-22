@@ -17,6 +17,7 @@ class Dog < Pet
     @emoji = '&#128515;'
     lower_states
     check
+    save
   end
 
   def love
@@ -25,6 +26,7 @@ class Dog < Pet
     @emoji = '&#128536;'
     lower_states
     check
+    save
   end
 
   def toilet
@@ -37,13 +39,16 @@ class Dog < Pet
     @emoji = '&#128520;'
     lower_states
     check
+    save
   end
     
   def reset
     self.class.new(self.name, self.user_login)
+    save
   end
 
   def change_type
     Dog.new(self.name)
+    save
   end
 end

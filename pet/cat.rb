@@ -8,6 +8,7 @@ class Cat < Pet
   def initialize(name, login)
     super
     @lifes = 9
+    save
   end
 
   def play
@@ -21,6 +22,7 @@ class Cat < Pet
     @emoji = '&#128570;'
     lower_states
     check
+    save
   end
 
   def love
@@ -29,6 +31,7 @@ class Cat < Pet
     @emoji = '&#128571;'
     lower_states
     check
+    save
   end
 
   def toilet
@@ -41,13 +44,16 @@ class Cat < Pet
     @emoji = '&#128572;'
     lower_states
     check
+    save
   end
   
   def reset
     self.class.new(self.name, self.user_login)
+    save
   end
 
   def change_type
     Dog.new(self.name, self.user_login)
+    save
   end
 end
