@@ -42,13 +42,13 @@ class Dog < Pet
     save
   end
     
-  def reset
+  def reset(user_login)
+    return puts("not_allowed".red) unless is_user_superadmin?(user_login)
     self.class.new(self.name, self.user_login)
-    save
   end
 
-  def change_type
+  def change_type(user_login)
+    return puts("not_allowed".red) unless is_user_admin?(user_login)
     Dog.new(self.name)
-    save
   end
 end

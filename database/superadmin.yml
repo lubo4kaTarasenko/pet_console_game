@@ -1,0 +1,14 @@
+--- !ruby/object:Cat
+user_login: superadmin
+name: booo
+feed_level: 3
+water_level: 3
+energy_level: 3
+lifes: 9
+need_toilet: false
+states:
+- feed_level = 3
+- water_level = 3
+- energy_level = 3
+response: []
+emoji: "&#128525;"

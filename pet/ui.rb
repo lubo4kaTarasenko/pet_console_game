@@ -49,25 +49,29 @@ class Ui
         @pet.random
         update_html
       when 'load_user_pet'
-        @pet = load_somebodys_pet
+        @pet = load_somebodys_pet(@user.login)
         update_html
       when 'change_name'
-        @pet.change_name
+        @pet.change_name(@user.login)
         update_html
       when 'change_type'
-        @pet = @pet.change_type
+        pet = @pet.change_type(@user.login) 
+        @pet = pet if pet
+        @pet.save
         update_html
       when 'change_owner_login'
-        @pet.change_user_login
+        @pet.change_user_login(@user.login)
         update_html
       when 'reset'
-        @pet = @pet.reset
+        pet = @pet.reset(@user.login) 
+        @pet = pet if pet
+        @pet.save
         update_html
       when 'change_life_states'
-        @pet.change_life_states
+        @pet.change_life_states(@user.login)
         update_html
       when 'kill'
-        @pet.kill
+        @pet.kill(@user.login)
         update_html
       when 'exit'
         break
@@ -124,7 +128,8 @@ class Ui
     PetHtml.new(@pet).make_html
   end
 
-  def load_somebodys_pet
+  def load_somebodys_pet(user_login)
+    return puts("not_allowed".red) unless @pet.is_user_admin?(user_login)
     puts 'Enter login of user, which pet to load, please: '.green 
     login = gets.strip.downcase
     YAML.load(File.read("./database/#{login}.yml"))
